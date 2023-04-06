@@ -6,7 +6,6 @@
  */
 
 import React from 'react';
-import type {PropsWithChildren} from 'react';
 import ConfirmationScreen from './src/screens/ConfirmationScreen';
 
 
