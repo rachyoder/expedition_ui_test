@@ -1,17 +1,18 @@
 import React from "react";
 import { ImageBackground, SafeAreaView, View, Text, StyleSheet } from "react-native";
-import CloseButton from '../components/CloseButton'
+import CloseButton from '../components/CloseButton';
+import ParkingCard from "../components/ParkingCard";
 
 const ConfirmationScreen = () => {
     return(
         <View style={{ width: "100%", height: "100%" }}>
             <ImageBackground source={require("../../assets/images/bg-map.png")} resizeMode="cover" style={{ height: "100%", width: "100%" }}>
-                <SafeAreaView>
+                <View>
                     <CloseButton />
                     <ConfirmationText />
                     <LabelText />
-                </SafeAreaView>
-    
+                    <ParkingCard />
+                </View>
             </ImageBackground>
         </View>
     );
@@ -55,6 +56,7 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         fontSize: 13,
         lineHeight: 18,
+        opacity: .60
     },
     label_container: {
         marginTop: 8,
