@@ -2,6 +2,7 @@ import React from "react";
 import { ImageBackground, SafeAreaView, View, Text, StyleSheet } from "react-native";
 import CloseButton from '../components/CloseButton';
 import ParkingCard from "../components/ParkingCard";
+import { Colors } from "../utilities/colors";
 
 const ConfirmationScreen = () => {
     return(
@@ -56,7 +57,7 @@ const styles = StyleSheet.create({
         fontWeight: "400",
         fontSize: 13,
         lineHeight: 18,
-        opacity: .60
+        color: Colors.black60,
     },
     label_container: {
         marginTop: 8,
