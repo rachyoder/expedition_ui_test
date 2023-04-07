@@ -3,6 +3,7 @@ import { ImageBackground, SafeAreaView, View, Text, StyleSheet } from "react-nat
 import CloseButton from '../components/CloseButton';
 import ParkingCard from "../components/ParkingCard";
 import { Colors } from "../utilities/colors";
+import IdentifyButton from "../components/IdentifyButton";
 
 const ConfirmationScreen = () => {
     return(
@@ -13,6 +14,7 @@ const ConfirmationScreen = () => {
                     <ConfirmationText />
                     <LabelText />
                     <ParkingCard />
+                    <IdentifyButton />
                 </View>
             </ImageBackground>
         </View>

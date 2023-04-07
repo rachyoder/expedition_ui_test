@@ -11,6 +11,7 @@ export const Colors = {
     black90: 'hsla(0, 0%, 0%, 0.9)',
     black: 'hsla(0, 0%, 0%, 1)',
     yellow: 'hsla(46, 92%, 57%, 1)',
+    yellow75: 'hsla(46, 92%, 57%, 0.75)',
     teal: 'hsla(190, 81%, 35%, 1)',
     white: 'hsla(0, 0%, 100%, 1)',
     backgroundGray: 'hsla(210, 22%, 96%, 1)',
