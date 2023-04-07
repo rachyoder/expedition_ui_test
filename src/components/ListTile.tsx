@@ -7,14 +7,19 @@ import IconReceipt from "../../assets/images/svg/s-icon-receipt.svg"
 import IconArrow from "../../assets/images/svg/s-icon-arrow.svg"
 import { Colors } from "../utilities/colors";
 
+export const enum ListIcons {
+  help = "help",
+  clock = "clock",
+  receipt = "receipt",
+}
 
 type ListTileProps = {
     label: string;
-    icon: string;
+    icon: ListIcons;
 };
 
 type TileIconLeadingProps = {
-  icon: string;
+  icon: ListIcons;
 }
 
 type TileLabelProps = {
@@ -26,12 +31,14 @@ const ListTile = (props: ListTileProps) => {
       <View style={styles.tile}>
         <TouchableOpacity>
           <View style={styles.row}>
-            <TileIconLeading icon={props.icon} />
-            <TileLabel label={props.label} />
+            <View style={styles.row_leading}>
+              <TileIconLeading icon={props.icon} />
+              <TileLabel label={props.label} />
+            </View>
             <TileIconTrailing />
           </View>  
         </TouchableOpacity>
-        {/* <View style={styles.border} /> */}
+       <View style={[props.icon != ListIcons.receipt ? styles.border : styles.no_border]} />
       </View>
     );
 };
@@ -81,15 +88,20 @@ const TileIconTrailing = () => {
 
 const styles = StyleSheet.create({
   tile: {
-    // width: 343,
     height: 58,
     // backgroundColor: Colors.white,
-    borderBottomWidth: 1,
-    borderBottomColor: Colors.dividerGray,
-    justifyContent: "flex-end",
+    // borderBottomWidth: 1,
+    // borderBottomColor: Colors.dividerGray,
+    justifyContent: "space-between",
+    paddingTop: 16,
   },
   row: {
     flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  row_leading: {
+    flexDirection: "row",
+    justifyContent: "flex-start",
   },
   icon_overlay: {
     position: "relative",
@@ -97,6 +109,8 @@ const styles = StyleSheet.create({
     left: "25%",
   },
   label_container: {
+    paddingTop: 5.52,
+    paddingLeft: 12,
   },
   label: {
     textAlign: "center",
@@ -106,13 +120,23 @@ const styles = StyleSheet.create({
     lineHeight: 16.59,
   },
   icon_leading: {
+    paddingLeft: 24,
   },
   icon_trailing: {
+    paddingTop: 8.41,
+    right: 24,
   },
   border: {
-    width: 319,
+    width: "95%",
     borderBottomWidth: 1,
     borderBottomColor: Colors.dividerGray,
+    alignSelf: "flex-end",
+  },
+  no_border: {
+    width: "95%",
+    // borderBottomWidth: 1,
+    // borderBottomColor: Colors.dividerGray,
+    alignSelf: "flex-end",
   }
 });
 

@@ -6,9 +6,14 @@ import EndIcon from "../../assets/images/svg/s-icon-end.svg";
 import { format } from "date-fns";
 import { Colors } from "../utilities/colors";
 
+export const enum DateTileType {
+    start = "start",
+    end = "end",
+}
+
 type DateTileProps = {
     date: Date,
-    type: string,
+    type: DateTileType,
 }
 
 type SelectIconProps = {
@@ -80,6 +85,7 @@ const styles = StyleSheet.create({
         fontWeight: "900",
         fontSize: 19,
         lineHeight: 23,
+        textTransform: "uppercase",
     },
     time_label: {
         fontFamily: "Rubik-Regular",

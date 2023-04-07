@@ -1,38 +1,36 @@
 import React from "react";
-import { Text, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 
-import ListTile from "./ListTile";
+import ListTile, { ListIcons } from "./ListTile";
 
-import IconHelp from "../../assets/images/svg/s-icon-help.svg";
 import { Colors } from "../utilities/colors";
-import DateTile from "./DateTile";
+import DateTile, { DateTileType } from "./DateTile";
+import OwnerTile from "./OwnerTile";
 
 
 const ParkingCard = () => {
     return(
         <View style={styles.card}>
             <View style={styles.date_container} >
-                <DateTile type="start" date={new Date(2019, 1, 20, 0)} />
-                <DateTile type="end" date={new Date(2019, 6, 20, 0)} />
+                <DateTile type={DateTileType.start} date={new Date(2019, 1, 20, 0)} />
+                <DateTile type={DateTileType.end} date={new Date(2019, 4, 20, 0)} />
             </View>
-            <ListTile label="View parking instructions" icon="help" />
-            <ListTile label="Purchase additional months" icon="clock" />
-            <ListTile label="View reciept for $272.95" icon="receipt" />
+            <ListTile label="View parking instructions" icon={ListIcons.help} />
+            <ListTile label="Purchase additional months" icon={ListIcons.clock} />
+            <ListTile label="View reciept for $272.95" icon={ListIcons.receipt} />
+            <OwnerTile first_name="Annie" last_name="Warner" role="Owner" />
         </View>
     );
 };
 
 const styles = StyleSheet.create({
     card: {
-        // flex: 1,
         backgroundColor: Colors.white,
         marginTop: 24,
         borderRadius: 8,
     },
     date_container: {
-        // flex: 1,
         flexDirection: "row",
-        // alignItems: "stretch"
     }
 });
 
