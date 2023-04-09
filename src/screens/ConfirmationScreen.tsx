@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ImageBackground, SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
+import { View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import CloseButton from '../components/CloseButton';
 import ParkingCard from "../components/ParkingCard";
 import { Colors } from "../utilities/colors";

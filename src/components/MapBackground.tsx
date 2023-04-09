@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Dimensions, StyleSheet, View } from "react-native";
 import MapView, { LatLng }  from "react-native-maps";
 import Geocoder from "react-native-geocoding";
@@ -13,11 +13,30 @@ type MapBackgroundProps = {
 
 
 const  MapBackground = (props: MapBackgroundProps) => {
-    // Geocoder.from(props.location_address).then(json => {
-    //     var address = json.results[0].geometry.location;
-    // }).catch(error => {
-    //     console.warn(error);
-    // });
+    const [isLoading, setLoading ] = useState(true);
+    const [latitude, setLatitude ] = useState<number>(37.78825);
+    const [longitude, setLongitude ] = useState<number>(-122.4324);
+
+    const getLatLng = async () => {
+        try {
+            const response = await Geocoder.from(props.location_address);
+            const json = response.results[0].geometry.location;
+            setLatitude(json.lat);
+            setLongitude(json.lng);
+        } catch(error) {
+            console.error(error);
+        }
+    }
+
+    useEffect(() => {
+        getLatLng();
+    }, [])
+
+    Geocoder.from(props.location_address).then(json => {
+        var address = json.results[0].geometry.location;
+    }).catch(error => {
+        console.warn(error);
+    });
 
     return (
         <View style={styles.container}>
@@ -25,10 +44,10 @@ const  MapBackground = (props: MapBackgroundProps) => {
                 style={styles.map}
                 mapType="standard"
                 region={{
-                    latitude: 37.78825,
-                    longitude: -122.4324,
-                    latitudeDelta: 0.0942,
-                    longitudeDelta: 0.0721,
+                    latitude: latitude,
+                    longitude: longitude,
+                    latitudeDelta: 0.012,
+                    longitudeDelta: 0.01,
                 }}
                 />
         </View>
