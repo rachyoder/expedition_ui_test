@@ -11,7 +11,6 @@ import ConfirmationScreen from './src/screens/ConfirmationScreen';
 
 function App(): JSX.Element {
 
-
   return (
     <ConfirmationScreen/>
   );

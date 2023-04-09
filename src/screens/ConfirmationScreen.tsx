@@ -1,25 +1,74 @@
-import React from "react";
-import { ImageBackground, SafeAreaView, View, Text, StyleSheet } from "react-native";
+import React, { useEffect, useState } from "react";
+import { ImageBackground, SafeAreaView, View, Text, StyleSheet, ActivityIndicator } from "react-native";
 import CloseButton from '../components/CloseButton';
 import ParkingCard from "../components/ParkingCard";
 import { Colors } from "../utilities/colors";
 import IdentifyButton from "../components/IdentifyButton";
+import MapBackground from "../components/MapBackground";
+
+type Purchase = {
+    start_date: Date,
+    end_date: Date,
+    price: number,
+    location_name: string,
+    location_address: string,
+    location_spot: string,
+    first_name: string,
+    last_name: string,
+    role: string,
+}
 
 const ConfirmationScreen = () => {
+    const [ isLoading, setLoading ] = useState(true);
+    const [ data, setData ] = useState<Purchase>();
+  
+    const getUserPurchase = async () => {
+      try {
+        const response = await fetch("http://localhost:3000/user-purchase");
+        const json = await response.json();
+        setData(json);
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoading(!true)
+      }
+    };
+  
+    useEffect(() => {
+        getUserPurchase();
+    }, []);
+  
     return(
         <View style={{ width: "100%", height: "100%" }}>
-            <ImageBackground source={require("../../assets/images/bg-map.png")} resizeMode="cover" style={{ height: "100%", width: "100%" }}>
+            <MapBackground location_address={data?.location_address ?? "15714 Melrose Ave, Beverly Hills, CA 90201"}/>
+            <View style={styles.background_container}>
                 <View>
                     <CloseButton />
                     <ConfirmationText />
                     <LabelText />
-                    <ParkingCard />
+                    {isLoading ? (
+                        <ActivityIndicator /> 
+                    ) : (    
+                        <ParkingCard 
+                        location_name={data?.location_name ?? ""}
+                        location_address={data?.location_address ?? ""}
+                        location_spot={data?.location_spot ?? ""}
+                        start_date={new Date(data?.start_date ?? "2019-02-20 00:00")}
+                        end_date={new Date(data?.end_date ?? "2019-05-20 00:00")}
+                        price={data?.price ?? 272.95}
+                        first_name={data?.first_name ?? ""}
+                        last_name={data?.last_name ?? ""}
+                        role={data?.role ?? ""}
+                        />
+                    )}
                     <IdentifyButton />
                 </View>
-            </ImageBackground>
+            </View>
         </View>
     );
 };
+
+
 
 const ConfirmationText = () => {
     return(
@@ -42,6 +91,12 @@ const LabelText = () => {
 };
 
 const styles = StyleSheet.create({
+    background_container: {
+        height: "100%",
+        width: "100%",
+        backgroundColor: Colors.yellow75,
+        // opacity: 0.75,
+    },
     header: {
         fontFamily: "Rubik-Regular",
         fontWeight: "900",

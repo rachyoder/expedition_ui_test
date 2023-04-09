@@ -9,14 +9,28 @@ import OwnerTile from "./OwnerTile";
 import LocationTile from "./LocationTile";
 import { Circle, Svg } from "react-native-svg";
 
+type ParkingCardProps = {
+    location_name: string,
+    location_address: string,
+    location_spot: string,
+    start_date: Date,
+    end_date: Date,
+    price: number,
+    first_name: string,
+    last_name: string,
+    role: string,
+}
 
-const ParkingCard = () => {
+
+const ParkingCard = (props: ParkingCardProps) => {
+    var priceReceipt = "View receipt for $" + props.price
+
     return(
         <View style={styles.card}>
             <LocationTile 
-                location_name="Fells Wargo's Parking Lot" 
-                location_address="15714 Melrose Ave, Beverly Hills, CA 90201"
-                location_spot="Spot 21"
+                location_name={props.location_name}
+                location_address={props.location_address}
+                location_spot={props.location_spot}
             />
             <View style={styles.ticket_stub}>
                 <Svg height={16} width={16} style={styles.ticket_left}>
@@ -27,13 +41,13 @@ const ParkingCard = () => {
                 </Svg>
             </View>
             <View style={styles.date_container} >
-                <DateTile type={DateTileType.start} date={new Date(2019, 1, 20, 0)} />
-                <DateTile type={DateTileType.end} date={new Date(2019, 4, 20, 0)} />
+                <DateTile type={DateTileType.start} date={props.start_date} />
+                <DateTile type={DateTileType.end} date={props.end_date} />
             </View>
             <ListTile label="View parking instructions" icon={ListIcons.help} />
             <ListTile label="Purchase additional months" icon={ListIcons.clock} />
-            <ListTile label="View reciept for $272.95" icon={ListIcons.receipt} />
-            <OwnerTile first_name="Annie" last_name="Warner" role="Owner" />
+            <ListTile label={priceReceipt} icon={ListIcons.receipt} />
+            <OwnerTile first_name={props.first_name} last_name={props.last_name} role={props.role} />
         </View>
     );
 };
